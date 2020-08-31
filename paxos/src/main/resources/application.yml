@@ -1,4 +1,16 @@
 server:
   port: 8000
 paxos:
-  instance: http://localhost:8000,http://localhost:8001,http://localhost:8002
+  acceptor: http://localhost:8000,http://localhost:8001,http://localhost:8002
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - shutdown
+          - info
+          - health
+  endpoint:
+    shutdown:
+      enabled: true

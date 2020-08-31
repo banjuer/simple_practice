@@ -9,8 +9,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
         exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class}
 )
 public class Application {
-    public Application() {
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);

@@ -10,12 +10,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SqliteHelper {
 
-    private final String path;
+    private final String db;
 
     private static final Map<String, SqliteHelper> INSTANCE_MAP = new ConcurrentHashMap<>();
 
     private SqliteHelper(String db) {
-        path = this.getClass().getResource("/") + db;
+        this.db = db;
     }
 
     public static SqliteHelper getDefaultInstance() {
@@ -72,7 +72,7 @@ public class SqliteHelper {
     private Connection getConn() {
         try {
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:" + path);
+            return DriverManager.getConnection("jdbc:sqlite::resource:" + db);
         } catch (Exception e) {
             e.printStackTrace();
         }

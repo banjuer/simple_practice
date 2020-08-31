@@ -1,47 +1,36 @@
 package xyz.banjuer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.banjuer.entity.AcceptorEntity;
 import xyz.banjuer.entity.ProposerEntity;
 import xyz.banjuer.tool.EmptyUtils;
+import xyz.banjuer.tool.OkHttpUtil;
 import xyz.banjuer.tool.SqliteHelper;
 
 @Slf4j
 @RestController
-@RequestMapping({"/rpc"})
+@RequestMapping("/rpc")
 public class PaxosRpcServer {
-    private int majorityN;
-    @Value("${paxos.instance}")
-    private String urls;
-    private List<String> instances;
+
     @Autowired
     private PaxosService paxosService;
 
-    @PostConstruct
-    public void init() {
-        String[] urlArr = this.urls.split(",");
-        this.majorityN = urlArr.length / 2 + 1;
-        this.instances = Arrays.asList(urlArr);
-    }
-
-    @GetMapping({"test"})
+    @GetMapping("test")
     public String test() {
         return "ok";
     }
 
-    @GetMapping({"acceptor/prepare"})
+    @GetMapping("acceptor/prepare")
     public synchronized AcceptorEntity acceptorPrepareSrv(int e) {
         AcceptorEntity cfg = this.getAcceptorCfg();
         this.byzantineAssert(cfg.p_e >= 0 && cfg.p_e >= cfg.a_e);
@@ -52,7 +41,7 @@ public class PaxosRpcServer {
         return cfg;
     }
 
-    @GetMapping({"acceptor/accept"})
+    @GetMapping("acceptor/accept")
     public synchronized AcceptorEntity acceptorAcceptSrv(int e, String v) {
         AcceptorEntity cfg = this.getAcceptorCfg();
         this.byzantineAssert(cfg.p_e >= 0 && cfg.p_e >= cfg.a_e && e <= cfg.p_e);
@@ -69,14 +58,14 @@ public class PaxosRpcServer {
         return cfg;
     }
 
-    @GetMapping({"/proposer/propose"})
-    public synchronized ProposerEntity proposerPropose(String v, int e) {
+    @GetMapping("/proposer/propose")
+    public ProposerEntity proposerPropose(String v, int e) {
         ProposerEntity proposer = new ProposerEntity();
         Map<String, Object> prepare = this.sendPrepare2Majority(e);
         int p_next_e = Integer.parseInt(prepare.get("p_next_e").toString());
         List<String> p_ok_list = (List) prepare.get("p_ok_list");
-        String max_a_v = prepare.get("max_a_v").toString();
-        if (p_ok_list.size() >= this.majorityN) {
+        String max_a_v = prepare.get("max_a_v") == null ? null : prepare.get("max_a_v").toString();
+        if (p_ok_list.size() >= paxosService.getMajorityN()) {
             String accept_v = v;
             boolean help_flag = false;
             if (max_a_v != null) {
@@ -87,7 +76,7 @@ public class PaxosRpcServer {
             Map<String, Object> accept = this.sendAccept(p_ok_list, e, accept_v);
             int a_next_e = Integer.parseInt(accept.get("a_next_e").toString());
             List<String> a_ok_list = (List) accept.get("a_ok_list");
-            if (a_ok_list.size() >= this.majorityN) {
+            if (a_ok_list.size() >= paxosService.getMajorityN()) {
                 proposer.chosen_flag = true;
                 proposer.help_chosen_flag = help_flag;
                 proposer.chosen_v = accept_v;
@@ -112,7 +101,9 @@ public class PaxosRpcServer {
         int a_next_e = e + 1;
         List<String> a_ok_list = new ArrayList(okInstance.size());
         for (String instance : okInstance) {
+            log.info("server {} send accept {},e:{},v:{}", paxosService.getThisPort(), instance, e, v);
             AcceptorEntity acceptor = this.paxosService.acceptorAccept(instance, e, v);
+            log.info("server {} receive accept result: {}", paxosService.getThisPort(), JSON.toJSON(acceptor));
             if (acceptor.op_flag) {
                 a_ok_list.add(instance);
             }
@@ -125,10 +116,12 @@ public class PaxosRpcServer {
 
     private Map<String, Object> sendPrepare2Majority(int e) {
         Map<String, Object> ret = new HashMap();
-        List<String> okList = new ArrayList(this.instances.size());
+        List<String> okList = new ArrayList(paxosService.getAcceptors().size());
         String max_a_v = null;
-        for (String instance : this.instances) {
+        for (String instance : paxosService.getAcceptors()) {
+            log.info("server {} send prepare {},e:{}", paxosService.getThisPort(), instance, e);
             AcceptorEntity acceptor = this.paxosService.acceptorPrepare(instance, e);
+            log.info("server {} receive prepare result {}", paxosService.getThisPort(), JSON.toJSON(acceptor));
             if (acceptor.op_flag) {
                 okList.add(instance);
                 if (EmptyUtils.isNotEmpty(acceptor.a_v)) {
@@ -145,7 +138,8 @@ public class PaxosRpcServer {
 
     private AcceptorEntity getAcceptorCfg() {
         AcceptorEntity config = new AcceptorEntity();
-        SqliteHelper.getDefaultInstance().query("select * from config", (Object[]) null, (rs) -> {
+        SqliteHelper.getDefaultInstance().query("select * from config limit 1", null, (rs) -> {
+            while (rs.next()) {
             String id = rs.getString(1);
             String cfg = rs.getString(2);
             int p_e = rs.getInt(3);
@@ -156,14 +150,20 @@ public class PaxosRpcServer {
             config.p_e = p_e;
             config.a_e = a_e;
             config.a_v = a_v;
+            }
         });
         return config;
     }
 
+    /**
+     * 拜占庭错误paxos实例停机
+     */
     private void byzantineAssert(boolean byzantineFlag) {
-        if (byzantineFlag) {
+        if (!byzantineFlag) {
             log.error("paxos got a byzantine error, instance will exit");
-            System.exit(-1);
+            for (String acceptor: paxosService.getAcceptors()) {
+                OkHttpUtil.post(acceptor + "/actuator/shutdown", null);
+            }
         }
 
     }
