@@ -4,3 +4,9 @@
 /paxos/paxos.iml
 /paxos/target/
 /out/
+将删除 src/main/resources/
+将删除 src/test/
+将删除 target/
+将删除 partterns/src/main/resources/
+将删除 partterns/src/test/
+将删除 partterns/target/
