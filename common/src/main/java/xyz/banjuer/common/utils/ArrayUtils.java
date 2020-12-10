@@ -5,14 +5,28 @@ import java.util.Random;
 
 public class ArrayUtils {
 
+    public static boolean isSorted(int[] arr) {
+        if (arr.length == 1) return true;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[i - 1])
+                return false;
+        }
+        return true;
+    }
+
     public static int[] genSorted(int length, int max) {
+        int[] arr = genArray(length, max);
+        Arrays.sort(arr);
+        return arr;
+    }
+
+    public static int[] genArray(int length, int max) {
         if (length < 0) throw new IllegalArgumentException("length must lager than " + length);
         int[] arr = new int[length];
         Random random = new Random(System.currentTimeMillis());
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(max + 1);
         }
-        Arrays.sort(arr);
         return arr;
     }
 
