@@ -2,7 +2,10 @@ package xyz.banjuer.csbase.leetcode;
 
 import xyz.banjuer.common.utils.ArrayUtils;
 
-public class Solution {
+/**
+ * 双指针
+ */
+public class SolutionTwoPointers {
 
     /* ======================单索引入门====================== */
 
@@ -116,7 +119,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Solution s = new Solution();
+        SolutionTwoPointers s = new SolutionTwoPointers();
         int[] ints;
         ints = ArrayUtils.genSorted(15, 10);
         // ints = new int[]{0,0,1,1,1,2,2,3,3,4};
