@@ -1,10 +1,57 @@
 package xyz.banjuer.common.utils;
 
+import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * @author banjuer
  * Remark: 近乎所有排序算法在元素小于一定程度时可使用插入排序进行优化
  */
 public class SortUtils {
+
+    private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
+
+    public static void quickSort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    /**
+     * [l, r]区间快排
+     */
+    private static void quickSort(int[] arr, int l, int r) {
+        if (l >= r) return;
+        int p = partition(arr, l, r);
+        quickSort(arr, l, p - 1);
+        quickSort(arr, p + 1, r);
+    }
+
+    /**
+     * [l, r]
+     * partition后元素放置到正确坐标并返回坐标
+     */
+    private static int partition(int[] arr, int l, int r) {
+        // 随机标定点
+        int t = RANDOM.nextInt(l, r + 1);
+        ArrayUtils.swap(arr, l, t);
+        int v = arr[l];
+        // 待遍历索引, 小于v [l + 1, lt], 大于v[gt, r], 等于v[lt + 1, i)
+        int i = l, lt = l, gt = r + 1;
+        while (i <= r && i < gt) {
+            if (arr[i] == v)
+                i++;
+            else if (arr[i] > v) {
+                gt--;
+                ArrayUtils.swap(arr, gt, i);
+            } else {
+                lt++;
+                ArrayUtils.swap(arr, lt, i);
+                i++;
+            }
+        }
+        int index = i - 1;
+        ArrayUtils.swap(arr, l, index);
+        return index;
+    }
 
     /**
      * 自底向上
@@ -70,13 +117,14 @@ public class SortUtils {
     }
 
     public static void main(String[] args) {
-        int[] nums = ArrayUtils.genArray(10, 20);
-        ArrayUtils.println(nums);
-        System.out.println("is sorted:" + ArrayUtils.isSorted(nums));
-        // SortUtils.mergeSort(nums);
-        SortUtils.mergeSortBU(nums);
-        ArrayUtils.println(nums);
-        System.out.println("is sorted:" + ArrayUtils.isSorted(nums));
+        int[] nums = ArrayUtils.genArray(2000000, 10000);
+        long start = System.currentTimeMillis();
+        // ArrayUtils.println(nums);
+        quickSort(nums);
+        Arrays.sort(nums);
+        // ArrayUtils.println(nums);
+        long end = System.currentTimeMillis();
+        System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start)/1000.0);
     }
 
 }
