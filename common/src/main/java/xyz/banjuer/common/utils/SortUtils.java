@@ -1,6 +1,5 @@
 package xyz.banjuer.common.utils;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -11,6 +10,9 @@ public class SortUtils {
 
     private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
 
+    /**
+     * 1. 快排
+     */
     public static void quickSort(int[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
@@ -54,7 +56,7 @@ public class SortUtils {
     }
 
     /**
-     * 自底向上
+     * 2.1 自底向上
      */
     public static void mergeSortBU(int[] arr) {
         for (int sz = 1; sz <= arr.length; sz += sz) {
@@ -65,7 +67,7 @@ public class SortUtils {
     }
 
     /**
-     * 递归归并: 自顶向下
+     * 2.2 递归归并: 自顶向下
      */
     public static void mergeSort(int[] arr) {
        mergeSort(arr, 0, arr.length);
@@ -116,12 +118,92 @@ public class SortUtils {
         }
     }
 
+    /**
+     * 3. 堆排序(小顶堆)
+     * @param arr
+     */
+    public static void heapSort(int[] arr) {
+        MinHeap heap = new MinHeap(arr);
+        int i = 0;
+        while (!heap.isEmpty()) {
+            int e = heap.extract();
+            arr[i++] = e;
+        }
+    }
+
+    private static class MinHeap {
+        private int sz;
+        private int[] arr;
+
+        public boolean isEmpty() {
+            return this.sz == 0;
+        }
+
+        public MinHeap(int[]  arr) {
+            this.sz = arr.length;
+            this.arr = new int[sz];
+            System.arraycopy(arr, 0, this.arr, 0, sz);
+            heapfiy();
+        }
+
+        private void heapfiy() {
+            for (int i = parent(this.sz - 1); i >= 0; i--) {
+                siftDown(i);
+            }
+        }
+
+        public int extract() {
+            if (this.sz == 0) throw new RuntimeException("no element to pop");
+            int min = this.arr[0];
+            swap(this.arr, 0, --this.sz);
+            siftDown(0);
+            return min;
+        }
+
+        /**
+         * 元素下沉
+         */
+        private void siftDown(int index) {
+            int l = left(index);
+            while (l < this.sz) {
+                int min = l, r = l + 1;
+                if (r < this.sz && arr[r] < arr[l]) min = r;
+                if (arr[index] > arr[min]) {
+                    swap(arr, min, index);
+                }
+                index = min;
+                l = left(index);
+            }
+        }
+
+        private int left(int index) {
+            return index * 2 + 1;
+        }
+
+        private int right(int index) {
+            return (index + 1) * 2;
+        }
+
+        private int parent(int index) {
+            // index左侧元素索引 = index - 1
+            return (index - 1) / 2;
+        }
+
+    }
+
+    private static void swap(int[] arr, int s, int t) {
+        int tmp = arr[s];
+        arr[s] = arr[t];
+        arr[t] = tmp;
+    }
+
     public static void main(String[] args) {
-        int[] nums = ArrayUtils.genArray(2000000, 10000);
+        int[] nums = ArrayUtils.genArray(10000000, 1000);
+        // int[] nums = new int[]{11, 57, 92, 58, 50, 4, 68, 47, 60, 49};
         long start = System.currentTimeMillis();
         // ArrayUtils.println(nums);
-        quickSort(nums);
-        Arrays.sort(nums);
+        // quickSort(nums);
+        heapSort(nums);
         // ArrayUtils.println(nums);
         long end = System.currentTimeMillis();
         System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start)/1000.0);
