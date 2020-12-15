@@ -119,15 +119,40 @@ public class SortUtils {
     }
 
     /**
-     * 3. 堆排序(小顶堆)
+     * 3. 堆排序
      * @param arr
      */
     public static void heapSort(int[] arr) {
-        MinHeap heap = new MinHeap(arr);
-        int i = 0;
-        while (!heap.isEmpty()) {
-            int e = heap.extract();
-            arr[i++] = e;
+        // 使用大顶堆，维护sz，实现不需额外空间
+        heapfiy(arr);
+        int sz = arr.length;
+        while (sz > 1) {
+            swap(arr, 0, --sz);
+            siftDown(arr, 0, sz);
+        }
+    }
+
+    /**
+     * 倒数第一个有叶子节点元素向前依次下沉
+     */
+    private static void heapfiy(int[] arr) {
+        for (int i = (arr.length - 1) / 2; i >= 0; i--) {
+            siftDown(arr, i, arr.length);
+        }
+    }
+
+    /**
+     * 大顶堆
+     * [0, sz)区间i元素下沉
+     */
+    private static void siftDown(int[] arr, int i, int sz) {
+        int l = i * 2 + 1;
+        while (l < sz) {
+            int r = l + 1, max = l;
+            if (r < sz && arr[r] > arr[l]) max = r;
+            if (arr[i] < arr[max]) swap(arr, i, max);
+            i = max;
+            l = i * 2 + 1;
         }
     }
 
@@ -198,13 +223,13 @@ public class SortUtils {
     }
 
     public static void main(String[] args) {
-        int[] nums = ArrayUtils.genArray(10000000, 1000);
+        int[] nums = ArrayUtils.genArray(20, 1000);
         // int[] nums = new int[]{11, 57, 92, 58, 50, 4, 68, 47, 60, 49};
         long start = System.currentTimeMillis();
-        // ArrayUtils.println(nums);
+        ArrayUtils.println(nums);
         // quickSort(nums);
         heapSort(nums);
-        // ArrayUtils.println(nums);
+        ArrayUtils.println(nums);
         long end = System.currentTimeMillis();
         System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start)/1000.0);
     }
