@@ -11,6 +11,22 @@ public class SortUtils {
     private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
 
     /**
+     * 插入
+     */
+    public static void insertSort(int[] arr) {
+        int sorted = 1;
+        for (int i = 1; i < arr.length; i++) {
+            int t = arr[i];
+            for (int j = sorted - 1; j >= 0; j--) {
+                if (t < arr[j] && j + 1 <= sorted) {
+                    swap(arr, j + 1, j);
+                }
+            }
+            sorted++;
+        }
+    }
+
+    /**
      * 冒泡
      */
     public static void bubbleSort(int[] arr) {
@@ -244,7 +260,8 @@ public class SortUtils {
         ArrayUtils.println(nums);
         // quickSort(nums);
         // heapSort(nums);
-        bubbleSort(nums);
+        // bubbleSort(nums);
+        insertSort(nums);
         ArrayUtils.println(nums);
         long end = System.currentTimeMillis();
         System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start)/1000.0);
