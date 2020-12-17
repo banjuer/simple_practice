@@ -44,8 +44,13 @@ simple_practice
 **查找**
 
 ### leetcode
-**双指针与循环不变量练习**
-> `xyz.banjuer.csbase.leetcode`
+
+#### 线性结构-数组
+> `xyz.banjuer.csbase.array.leetcode`
+
+**双指针练习**
+
+**循环不变量练习**
 * 26 删除排序数组中的重复项
 * 27 移除元素
 * 80 删除排序数组中的重复项 II

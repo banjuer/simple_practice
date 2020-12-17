@@ -1,4 +1,4 @@
-package xyz.banjuer.csbase.leetcode;
+package xyz.banjuer.csbase.leetcode.array;
 
 import xyz.banjuer.common.utils.ArrayUtils;
 import xyz.banjuer.common.utils.SortUtils;
