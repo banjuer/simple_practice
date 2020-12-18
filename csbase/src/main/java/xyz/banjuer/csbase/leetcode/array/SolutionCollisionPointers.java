@@ -1,12 +1,11 @@
 package xyz.banjuer.csbase.leetcode.array;
 
-import java.util.Arrays;
-
 /**
  * 双索引:
+ * 碰撞指针
  * 在双索引技术下，计算成本更优秀(时间复杂度)
  */
-public class SolutionTwoPointers {
+public class SolutionCollisionPointers {
 
     /**
      * 11. 盛最多水的容器
@@ -154,7 +153,7 @@ public class SolutionTwoPointers {
     }
 
     public static void main(String[] args) {
-        SolutionTwoPointers solution = new SolutionTwoPointers();
+        SolutionCollisionPointers solution = new SolutionCollisionPointers();
         int[] height = new int[]{1,8,6,2,5,4,8,3,7};
         System.out.println(solution.maxArea(height));
     }

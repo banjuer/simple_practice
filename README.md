@@ -49,12 +49,20 @@ simple_practice
 > `xyz.banjuer.csbase.array.leetcode`
 
 **双指针练习**
+* 对撞指针`SolutionCollisionPointers`
+    * 11 盛最多水的容器
+    * 125 验证回文串
+    * 167 两数之和 II - 输入有序数组
+    * 344 反转字符串
+    * 345 反转字符串中的元音字母
+* 滑动窗口 `SolutionSlidingWindow`
 
-**循环不变量练习**
+**循环不变量练习**`SolutionSinglePointer`
 * 26 删除排序数组中的重复项
 * 27 移除元素
 * 80 删除排序数组中的重复项 II
 * 283 移动零
+
 **排序衍生**
 * 75 颜色分类(快排partition||计数)
 * 88 合并两个有序数组(归并排序合并有序数组)
