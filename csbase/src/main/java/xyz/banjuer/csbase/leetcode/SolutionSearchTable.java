@@ -1,9 +1,7 @@
 package xyz.banjuer.csbase.leetcode;
 
-import xyz.banjuer.common.utils.ArrayUtils;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
