@@ -32,12 +32,13 @@ public class SolutionSearchTable {
                 this.c = c;
                 this.cnt = cnt;
             }
+
             int cnt;
             char c;
         }
         // 入队
         Queue<Node> q = new PriorityQueue<>((o1, o2) -> o2.cnt - o1.cnt);
-        scMap.forEach((k,v) -> q.offer(new Node(v, k)));
+        scMap.forEach((k, v) -> q.offer(new Node(v, k)));
         StringBuilder sb = new StringBuilder(sc.length);
         // 出队
         while (!q.isEmpty()) {
@@ -89,8 +90,7 @@ public class SolutionSearchTable {
         for (int i = 0; i < chars.length; i++) {
             String s1 = patternMap.get(chars[i]);
             if (s1 == null) patternMap.put(chars[i], ss[i]);
-            else
-                if (!s1.equals(ss[i])) return false;
+            else if (!s1.equals(ss[i])) return false;
         }
         Collection<String> values = patternMap.values();
         if (values.size() != new HashSet<>(values).size()) return false;
@@ -148,11 +148,11 @@ public class SolutionSearchTable {
      * 给定两个数组，编写一个函数来计算它们的交集。
      */
     public int[] intersection(int[] nums1, int[] nums2) {
-        Set<Integer> set1 = new HashSet<>(Math.max((int)(nums1.length / .75f) + 1, 16));
+        Set<Integer> set1 = new HashSet<>(Math.max((int) (nums1.length / .75f) + 1, 16));
         for (int j : nums1) {
             set1.add(j);
         }
-        Set<Integer> common = new HashSet<>(Math.max((int)(nums2.length / .75f) + 1, 16));
+        Set<Integer> common = new HashSet<>(Math.max((int) (nums2.length / .75f) + 1, 16));
         for (int j : nums2) {
             if (set1.contains(j)) common.add(j);
         }
@@ -218,7 +218,7 @@ public class SolutionSearchTable {
     }
 
     int mapSize(int[] arr) {
-        return Math.max((int)(arr.length / .75) + 1, 16);
+        return Math.max((int) (arr.length / .75) + 1, 16);
     }
 
 

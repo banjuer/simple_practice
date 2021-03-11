@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class LightOnCommand implements Command {
     private final AtomicInteger onCommand = new AtomicInteger(0);
+
     @Override
     public void execute() {
         System.out.printf("light on %d times\n", onCommand.incrementAndGet());

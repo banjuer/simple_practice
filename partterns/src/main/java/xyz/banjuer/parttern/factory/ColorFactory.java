@@ -4,7 +4,7 @@ public class ColorFactory extends AbstractFactory {
     @Override
     public Color getColor(String type) {
         Color color = null;
-        switch (type.toUpperCase()){
+        switch (type.toUpperCase()) {
             case "RED":
                 color = new Red();
                 break;

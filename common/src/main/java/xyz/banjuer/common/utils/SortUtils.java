@@ -25,7 +25,7 @@ public class SortUtils {
      */
     private static int findMinIndex(int[] arr, int l, int r) {
         int min = l;
-        for(int i = l + 1; i <= r; i++) {
+        for (int i = l + 1; i <= r; i++) {
             if (arr[min] > arr[i]) min = i;
         }
         return min;
@@ -55,8 +55,8 @@ public class SortUtils {
         int sz = 0;
         while (sz < arr.length) {
             for (int i = 0; i < arr.length - sz; i++) {
-                if (i + 1 < arr.length -sz && arr[i] > arr[i + 1])
-                    swap(arr, i, i+1);
+                if (i + 1 < arr.length - sz && arr[i] > arr[i + 1])
+                    swap(arr, i, i + 1);
             }
             sz++;
         }
@@ -122,7 +122,7 @@ public class SortUtils {
      * 2.2 递归归并: 自顶向下
      */
     public static void mergeSort(int[] arr) {
-       mergeSort(arr, 0, arr.length);
+        mergeSort(arr, 0, arr.length);
     }
 
     /**
@@ -142,7 +142,7 @@ public class SortUtils {
      * 归并[l,m),[m,r)元素
      */
     private static void merge(int[] arr, int l, int m, int r) {
-        int[] aux = new int[r -l];
+        int[] aux = new int[r - l];
         // 归并后索引位
         int i = 0;
         // 左边起始[l, m) 左侧下一个待遍历索引位
@@ -172,6 +172,7 @@ public class SortUtils {
 
     /**
      * 3. 堆排序
+     *
      * @param arr
      */
     public static void heapSort(int[] arr) {
@@ -216,7 +217,7 @@ public class SortUtils {
             return this.sz == 0;
         }
 
-        public MinHeap(int[]  arr) {
+        public MinHeap(int[] arr) {
             this.sz = arr.length;
             this.arr = new int[sz];
             System.arraycopy(arr, 0, this.arr, 0, sz);
@@ -286,7 +287,7 @@ public class SortUtils {
         selectSort(nums);
         ArrayUtils.println(nums);
         long end = System.currentTimeMillis();
-        System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start)/1000.0);
+        System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start) / 1000.0);
     }
 
 }

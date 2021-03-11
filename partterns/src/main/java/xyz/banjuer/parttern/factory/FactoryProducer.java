@@ -4,7 +4,7 @@ public class FactoryProducer {
 
     public static AbstractFactory produce(String type) {
         AbstractFactory factory = null;
-        switch (type.toUpperCase()){
+        switch (type.toUpperCase()) {
             case "SHAPE":
                 factory = new ShapeFactory();
                 break;

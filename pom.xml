@@ -10,7 +10,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>paxos</module><module>partterns</module><module>netty</module><module>jbase</module><module>jvm</module><module>csbase</module><module>common</module>
+        <module>paxos</module>
+        <module>partterns</module>
+        <module>netty</module>
+        <module>jbase</module>
+        <module>jvm</module>
+        <module>csbase</module>
+        <module>common</module>
     </modules>
 
 
@@ -68,5 +74,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class DoorOpenCommand implements Command {
     private final AtomicInteger openCommand = new AtomicInteger(0);
+
     @Override
     public void execute() {
         System.out.printf("door open %d times\n", openCommand.incrementAndGet());

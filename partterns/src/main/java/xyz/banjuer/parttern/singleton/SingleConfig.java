@@ -14,7 +14,7 @@ public class SingleConfig {
 
     private static volatile SingleConfig config;
 
-    private SingleConfig(){
+    private SingleConfig() {
         this.myid = new Random().nextInt();
         try {
             // 模拟大对象初始化(耗时长)
@@ -28,7 +28,7 @@ public class SingleConfig {
         System.out.printf("current thread is: %d, singleton id is: %d \n", Thread.currentThread().getId(), myid);
     }
 
-    public static SingleConfig getInstanceLazy(){
+    public static SingleConfig getInstanceLazy() {
         if (config == null) {
             synchronized (SingleConfig.class) {
                 if (config == null) {
@@ -39,14 +39,14 @@ public class SingleConfig {
         return config;
     }
 
-    public static SingleConfig getInstanceLazyUnsafe(){
+    public static SingleConfig getInstanceLazyUnsafe() {
         if (config == null) {
             config = new SingleConfig();
         }
         return config;
     }
 
-    public static SingleConfig getInstanceHunger(){
+    public static SingleConfig getInstanceHunger() {
         return CONFIG;
     }
 
@@ -58,7 +58,7 @@ public class SingleConfig {
      * lazy-loading
      * 当类被访问时才进行加载
      */
-    private static class SingleHolder{
+    private static class SingleHolder {
         private static final SingleConfig INSTANCE = new SingleConfig();
     }
 

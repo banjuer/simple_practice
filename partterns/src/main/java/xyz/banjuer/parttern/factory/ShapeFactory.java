@@ -9,7 +9,7 @@ public class ShapeFactory extends AbstractFactory {
     @Override
     public Shape getShape(String type) {
         Shape shape = null;
-        switch (type.toUpperCase()){
+        switch (type.toUpperCase()) {
             case "CIRCLE":
                 shape = new Circle();
                 break;

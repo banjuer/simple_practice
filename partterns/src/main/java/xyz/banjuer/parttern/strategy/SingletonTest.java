@@ -14,6 +14,7 @@ public class SingletonTest {
 
     /**
      * 对xyz.banjuer.parttern.singleton.SingletonTest测试代码使用策略者模式封装
+     *
      * @param threads
      * @param config
      */

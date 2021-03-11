@@ -140,16 +140,16 @@ public class PaxosRpcServer {
         AcceptorEntity config = new AcceptorEntity();
         SqliteHelper.getDefaultInstance().query("select * from config limit 1", null, (rs) -> {
             while (rs.next()) {
-            String id = rs.getString(1);
-            String cfg = rs.getString(2);
-            int p_e = rs.getInt(3);
-            int a_e = rs.getInt(4);
-            String a_v = rs.getString(5);
-            config.id = id;
-            config.cfg = cfg;
-            config.p_e = p_e;
-            config.a_e = a_e;
-            config.a_v = a_v;
+                String id = rs.getString(1);
+                String cfg = rs.getString(2);
+                int p_e = rs.getInt(3);
+                int a_e = rs.getInt(4);
+                String a_v = rs.getString(5);
+                config.id = id;
+                config.cfg = cfg;
+                config.p_e = p_e;
+                config.a_e = a_e;
+                config.a_v = a_v;
             }
         });
         return config;
@@ -161,7 +161,7 @@ public class PaxosRpcServer {
     private void byzantineAssert(boolean byzantineFlag) {
         if (!byzantineFlag) {
             log.error("paxos got a byzantine error, instance will exit");
-            for (String acceptor: paxosService.getAcceptors()) {
+            for (String acceptor : paxosService.getAcceptors()) {
                 OkHttpUtil.post(acceptor + "/actuator/shutdown", null);
             }
         }

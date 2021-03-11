@@ -11,12 +11,13 @@ public class SolutionSort {
     /**
      * 75. 颜色分类
      * 给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
-     *
+     * <p>
      * 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/sort-colors
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param nums
      */
     public void sortColors1(int[] nums) {
@@ -36,13 +37,14 @@ public class SolutionSort {
             nums[i] = 2;
         }
     }
+
     public void sortColors(int[] nums) {
         //  2.可不可以一次遍历完事儿？ 3个元素分组->快排partition
         // 0元素索引位[0, zero]
         int zero = -1;
         // 2元素索引位[two, nums.length)
         int two = nums.length;
-        for (int i = 0; i < two;) {
+        for (int i = 0; i < two; ) {
             if (nums[i] == 0) {
                 swap(nums, zero + 1, i);
                 zero++;
@@ -68,7 +70,7 @@ public class SolutionSort {
         // merge aux,nums2
         // 合并元素索引, aux待合并索引, nums2待合并索引位
         int i = 0, j = 0, k = 0;
-        for(; i < m + n && j < m && k < n; i++) {
+        for (; i < m + n && j < m && k < n; i++) {
             if (aux[j] >= nums2[k]) {
                 nums1[i] = nums2[k];
                 k++;
@@ -126,7 +128,7 @@ public class SolutionSort {
                 gt--;
                 swap(nums, i, gt);
             } else {
-                i ++;
+                i++;
             }
         }
         swap(nums, --i, l);

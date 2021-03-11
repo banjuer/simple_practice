@@ -50,7 +50,7 @@ public class PaxosInstanceProcessor implements ApplicationRunner {
 
         private void mustChosen(String chosen_v) {
             int e = 1;
-            while(true) {
+            while (true) {
                 ProposerEntity proposerEntity = this.rpcServer.proposerPropose(chosen_v, e);
                 log.info("server {} first proposer propose result:{}", paxosService.getThisPort(), JSON.toJSONString(proposerEntity));
                 if (proposerEntity.chosen_flag) {
@@ -64,7 +64,7 @@ public class PaxosInstanceProcessor implements ApplicationRunner {
 
         private void waitMajorityOnline() throws InterruptedException {
             boolean majorityOnline = false;
-            while(!majorityOnline) {
+            while (!majorityOnline) {
                 int online = 0;
                 for (String acceptor : this.acceptors) {
                     String text = this.paxosService.instanceDiscover(acceptor);

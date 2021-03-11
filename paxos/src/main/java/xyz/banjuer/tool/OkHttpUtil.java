@@ -7,6 +7,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.Request.Builder;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +36,7 @@ public class OkHttpUtil {
     }
 
     public static String get(String url) {
-        return get(url, (Map)null);
+        return get(url, (Map) null);
     }
 
     public static String get(String url, Map<String, String> params) {
@@ -92,7 +93,7 @@ public class OkHttpUtil {
 
         @Override
         public IOException getCause() {
-            return (IOException)super.getCause();
+            return (IOException) super.getCause();
         }
     }
 

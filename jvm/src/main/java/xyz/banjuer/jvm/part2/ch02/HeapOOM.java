@@ -5,11 +5,10 @@ import java.util.List;
 
 /**
  * -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError
- *
  */
 public class HeapOOM {
 
-static class OOMObject {
+    static class OOMObject {
         private final byte[] bs = new byte[1024];
     }
 

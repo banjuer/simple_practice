@@ -12,12 +12,13 @@ public class SolutionSinglePointer {
     /**
      * 26. 删除排序数组中的重复项
      * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
-     *
+     * <p>
      * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param nums
      * @return
      */
@@ -25,23 +26,24 @@ public class SolutionSinglePointer {
         // 不重复元素索引位
         int nonDupIndex = 0;
         for (int i = 1; i < nums.length; i++) {
-            if (nums[i] != nums[nonDupIndex] && ++nonDupIndex != i) swap(nums, nonDupIndex , i);
+            if (nums[i] != nums[nonDupIndex] && ++nonDupIndex != i) swap(nums, nonDupIndex, i);
         }
         return nonDupIndex + 1;
     }
 
     /**
      * 27. 移除元素
-     *
+     * <p>
      * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
-     *
+     * <p>
      * 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
-     *
+     * <p>
      * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/remove-element
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param nums
      * @param val
      * @return
@@ -50,7 +52,7 @@ public class SolutionSinglePointer {
         // 非目标值索引位
         int notValIndex = -1;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != val && ++notValIndex !=i) swap(nums, notValIndex, i);
+            if (nums[i] != val && ++notValIndex != i) swap(nums, notValIndex, i);
         }
         return notValIndex + 1;
     }
@@ -58,12 +60,13 @@ public class SolutionSinglePointer {
     /**
      * 80. 删除排序数组中的重复项 II
      * 给定一个增序排列数组 nums ，你需要在 原地 删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。
-     *
+     * <p>
      * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param nums
      * @return
      */
@@ -74,12 +77,12 @@ public class SolutionSinglePointer {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] == nums[dupIndex]) {
                 if (numCount > 1) {
-                    dupIndex ++;
-                    numCount --;
+                    dupIndex++;
+                    numCount--;
                     if (dupIndex != i) swap(nums, dupIndex, i);
                 }
             } else {
-                dupIndex ++;
+                dupIndex++;
                 numCount = remain;
                 if (dupIndex != i) swap(nums, dupIndex, i);
             }
@@ -90,20 +93,21 @@ public class SolutionSinglePointer {
     /**
      * 283. 移动零
      * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+     *
      * @param nums
      */
     public void moveZeroes(int[] nums) {
         // 0值索引
         // 题意理解错误: 打乱了元素相对顺序
-       // int zeroIndex = nums.length;
-       // for (int i = 0; i < zeroIndex; i++) {
-       //     if (nums[i] == 0) {
-       //         zeroIndex --;
-       //         while (nums[zeroIndex] == 0) zeroIndex--;
-       //         if (zeroIndex != i) swap(nums, zeroIndex, i);
-       //     }
-       // }
-        
+        // int zeroIndex = nums.length;
+        // for (int i = 0; i < zeroIndex; i++) {
+        //     if (nums[i] == 0) {
+        //         zeroIndex --;
+        //         while (nums[zeroIndex] == 0) zeroIndex--;
+        //         if (zeroIndex != i) swap(nums, zeroIndex, i);
+        //     }
+        // }
+
         // 非0元素索引位
         int nonZero = -1;
         for (int i = 0; i < nums.length; i++) {

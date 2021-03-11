@@ -12,13 +12,13 @@ public class EmptyUtils {
         if (o == null) {
             return true;
         } else if (o instanceof String) {
-            return ((String)o).length() == 0;
+            return ((String) o).length() == 0;
         } else if (o instanceof Collection) {
-            return ((Collection)o).isEmpty();
+            return ((Collection) o).isEmpty();
         } else if (o.getClass().isArray()) {
             return Array.getLength(o) == 0;
         } else {
-            return o instanceof Map ? ((Map)o).isEmpty() : false;
+            return o instanceof Map ? ((Map) o).isEmpty() : false;
         }
     }
 
