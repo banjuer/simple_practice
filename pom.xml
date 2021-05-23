@@ -17,6 +17,7 @@
         <module>jvm</module>
         <module>csbase</module>
         <module>common</module>
+        <module>test</module>
     </modules>
 
 

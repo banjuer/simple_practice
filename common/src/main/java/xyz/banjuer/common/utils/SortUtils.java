@@ -1,5 +1,7 @@
 package xyz.banjuer.common.utils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

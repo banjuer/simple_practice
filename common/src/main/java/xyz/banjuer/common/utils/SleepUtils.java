@@ -1,5 +1,7 @@
 package xyz.banjuer.common.utils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SleepUtils {
@@ -14,6 +16,10 @@ public class SleepUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Map m = new HashMap(7);
     }
 
 }
