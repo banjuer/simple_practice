@@ -1,19 +1,19 @@
 package xyz.banjuer.csbase.interview;
 
-import xyz.banjuer.common.enty.Node;
-import xyz.banjuer.common.utils.LinkUtils;
+import xyz.banjuer.common.entity.ListNode;
+import xyz.banjuer.common.utils.ListNodeUtils;
 
 public class Link {
 
-    public Node reverse(Node node) {
+    public ListNode reverse(ListNode node) {
         if (node == null) {
             return null;
         }
-        Node reversed = node;
-        Node cur = node.next;
+        ListNode reversed = node;
+        ListNode cur = node.next;
         reversed.next = null;
 
-        Node next;
+        ListNode next;
         while (cur != null) {
             next = cur.next;
             if (next == null) {
@@ -29,10 +29,10 @@ public class Link {
     }
 
     public static void main(String[] args) {
-        Node head = LinkUtils.genLink(new int[]{1, 2, 3, 4, 5});
-        LinkUtils.printLink(head);
+        ListNode head = ListNodeUtils.createLink(new int[]{1, 2, 3, 4, 5});
+        ListNodeUtils.printLink(head);
         Link link = new Link();
-        LinkUtils.printLink(link.reverse(head));
+        ListNodeUtils.printLink(link.reverse(head));
     }
 
 }

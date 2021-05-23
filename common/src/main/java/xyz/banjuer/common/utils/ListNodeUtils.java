@@ -1,23 +1,23 @@
 package xyz.banjuer.common.utils;
 
-import xyz.banjuer.common.enty.Node;
+import xyz.banjuer.common.entity.ListNode;
 
-public class LinkUtils {
+public class ListNodeUtils {
 
-    public static Node genLink(int[] arr) {
-        Node dummy = new Node(0);
-        Node head = dummy;
+    public static ListNode createLink(int[] arr) {
+        ListNode dummy = new ListNode(0);
+        ListNode head = dummy;
         for (int i = 0; i < arr.length; i++) {
-            head.next = new Node(arr[i]);
+            head.next = new ListNode(arr[i]);
             head = head.next;
         }
         return dummy.next;
     }
 
-    public static void printLink(Node head) {
+    public static void printLink(ListNode head) {
         StringBuilder builder = new StringBuilder();
         while (head != null) {
-            builder.append(head.data).append("->");
+            builder.append(head.val).append("->");
             head = head.next;
         }
         builder.append("NULL");
