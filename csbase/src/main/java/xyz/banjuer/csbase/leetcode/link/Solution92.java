@@ -1,6 +1,7 @@
 package xyz.banjuer.csbase.leetcode.link;
 
 import xyz.banjuer.common.entity.ListNode;
+import xyz.banjuer.common.utils.ListNodeUtils;
 
 public class Solution92 {
 
@@ -11,33 +12,53 @@ public class Solution92 {
      * 请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
      */
     public ListNode reverseBetween(ListNode head, int left, int right) {
+        // 以及一个遍历的节点:curNode
         ListNode dummy = new ListNode();
         dummy.next = head;
-
-        // 遍历的索引位
-        int index = 1;
-        ListNode beforeLeft = null;
+        ListNode curNode = dummy;
+        // 需要定位5个节点：当前链表的头head，left的前一个节点preLeftNode,left节点leftNode,right节点rightNode，right下一个几点afterRightNode
+        ListNode preLeftNode = null, leftNode, rightNode,afterRightNode;
+        // 定位5个节点
+        int index = 0;
+        // left<1从头反转
+        if (left < 1) {
+            left = 1;
+        }
+        // 定位到left上一个节点
         while (index < left) {
-            beforeLeft = head;
-            head = head.next;
-            index ++;
+            preLeftNode = curNode;
+            curNode = curNode.next;
+            index++;
         }
-        // 此时 index == left
-        beforeLeft.next = null;
-        // 开始反转链表
-        ListNode pre = null;
-        ListNode lNode = head;
-        ListNode next = head.next;
-        while (index <= right) {
-            head.next = pre;
-            pre = head;
-            next = head.next;
+        leftNode = preLeftNode.next;
+        // 此时index已经到达left,定位right节点
+        while (index < right) {
+            curNode = curNode.next;
+            index++;
         }
-        ListNode rNode = next;
-
-        beforeLeft.next = rNode;
-        lNode.next = head.next;
+        rightNode = curNode;
+        afterRightNode = rightNode.next;
+        // 打断
+        preLeftNode.next = null;
+        rightNode.next = null;
+        // 反转链表
+        ListNode reversed = null, cur2 = leftNode;
+        while (cur2 != null) {
+            ListNode next = cur2.next;
+            cur2.next = reversed;
+            reversed = cur2;
+            cur2 = next;
+        }
+        // 拼接最后链表
+        preLeftNode.next = rightNode;
+        leftNode.next = afterRightNode;
         return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        Solution92 solution92 = new Solution92();
+        ListNode link = ListNodeUtils.createLink(new int[]{1, 2, 3, 4, 5, 6});
+        ListNodeUtils.printLink(solution92.reverseBetween(link, 1, 6));
     }
 
 }

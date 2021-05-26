@@ -16,16 +16,12 @@ public class Solution206 {
         if (head == null) {
             return null;
         }
-        // 下一个节点
-        ListNode next = head.next;
         while (head != null) {
+            // 开始反转
+            ListNode next = head.next;
             head.next = resvered;
             resvered = head;
             head = next;
-            if (head != null) {
-                next = head.next;
-            }
-
         }
         return resvered;
     }
