@@ -59,7 +59,7 @@ public class ListUtils {
         return dummy.next;
     }
 
-    public static void printLink(ListNode head) {
+    public static void println(ListNode head) {
         StringBuilder builder = new StringBuilder();
         while (head != null) {
             builder.append(head.val).append("->");
