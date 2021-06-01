@@ -1,7 +1,6 @@
 package xyz.banjuer.csbase.leetcode.link;
 
 import xyz.banjuer.common.entity.ListNode;
-import xyz.banjuer.common.utils.ListNodeUtils;
 
 public class Solution328 {
 
@@ -44,9 +43,9 @@ public class Solution328 {
     }
 
     public static void main(String[] args) {
-        ListNode link = ListNodeUtils.createLink(new int[]{1,2,3,4});
+        ListNode link = ListUtils.createLink(new int[]{1,2,3,4});
         Solution328 solution328 = new Solution328();
-        ListNodeUtils.printLink(solution328.oddEvenList(link));
+        ListUtils.printLink(solution328.oddEvenList(link));
     }
 
 }

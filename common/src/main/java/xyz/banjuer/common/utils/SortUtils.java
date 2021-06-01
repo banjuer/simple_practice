@@ -1,7 +1,5 @@
 package xyz.banjuer.common.utils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -88,7 +86,7 @@ public class SortUtils {
     private static int partition(int[] arr, int l, int r) {
         // 随机标定点
         int t = RANDOM.nextInt(l, r + 1);
-        ArrayUtils.swap(arr, l, t);
+        ListUtils.swap(arr, l, t);
         int v = arr[l];
         // 待遍历索引, 小于v [l + 1, lt], 大于v[gt, r], 等于v[lt + 1, i)
         int i = l, lt = l, gt = r + 1;
@@ -97,15 +95,15 @@ public class SortUtils {
                 i++;
             else if (arr[i] > v) {
                 gt--;
-                ArrayUtils.swap(arr, gt, i);
+                ListUtils.swap(arr, gt, i);
             } else {
                 lt++;
-                ArrayUtils.swap(arr, lt, i);
+                ListUtils.swap(arr, lt, i);
                 i++;
             }
         }
         int index = i - 1;
-        ArrayUtils.swap(arr, l, index);
+        ListUtils.swap(arr, l, index);
         return index;
     }
 
@@ -278,18 +276,18 @@ public class SortUtils {
     }
 
     public static void main(String[] args) {
-        int[] nums = ArrayUtils.genArray(20, 1000);
+        int[] nums = ListUtils.genArray(20, 1000);
         // int[] nums = new int[]{11, 57, 92, 58, 50, 4, 68, 47, 60, 49};
         long start = System.currentTimeMillis();
-        ArrayUtils.println(nums);
+        ListUtils.println(nums);
         // quickSort(nums);
         // heapSort(nums);
         // bubbleSort(nums);
         // insertSort(nums);
         selectSort(nums);
-        ArrayUtils.println(nums);
+        ListUtils.println(nums);
         long end = System.currentTimeMillis();
-        System.out.printf("is sorted: %s, cost: %fs\n", ArrayUtils.isSorted(nums), (end - start) / 1000.0);
+        System.out.printf("is sorted: %s, cost: %fs\n", ListUtils.isSorted(nums), (end - start) / 1000.0);
     }
 
 }

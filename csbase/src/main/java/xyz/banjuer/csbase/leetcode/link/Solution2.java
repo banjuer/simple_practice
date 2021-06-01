@@ -1,7 +1,6 @@
 package xyz.banjuer.csbase.leetcode.link;
 
 import xyz.banjuer.common.entity.ListNode;
-import xyz.banjuer.common.utils.ListNodeUtils;
 
 public class Solution2 {
 
@@ -107,11 +106,11 @@ public class Solution2 {
     }
 
     public static void main(String[] args) {
-        ListNode l1 = ListNodeUtils.createLink(new int[]{9,9,9,9,9,9,9});
-        ListNode l2 = ListNodeUtils.createLink(new int[]{9, 9, 9, 9});
+        ListNode l1 = ListUtils.createLink(new int[]{9,9,9,9,9,9,9});
+        ListNode l2 = ListUtils.createLink(new int[]{9, 9, 9, 9});
         Solution2 solution2 = new Solution2();
         ListNode listNode = solution2.addTwoNumbers2(l1, l2);
-        ListNodeUtils.printLink(listNode);
+        ListUtils.printLink(listNode);
     }
 
 }

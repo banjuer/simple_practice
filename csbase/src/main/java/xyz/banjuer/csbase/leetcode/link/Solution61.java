@@ -1,7 +1,6 @@
 package xyz.banjuer.csbase.leetcode.link;
 
 import xyz.banjuer.common.entity.ListNode;
-import xyz.banjuer.common.utils.ListNodeUtils;
 
 public class Solution61 {
 
@@ -45,8 +44,8 @@ public class Solution61 {
 
     public static void main(String[] args) {
         Solution61 solution61 = new Solution61();
-        ListNode link = ListNodeUtils.createLink(new int[]{1});
-        ListNodeUtils.printLink(solution61.rotateRight(link, 1));
+        ListNode link = ListUtils.createLink(new int[]{1});
+        ListUtils.printLink(solution61.rotateRight(link, 1));
     }
 
 }

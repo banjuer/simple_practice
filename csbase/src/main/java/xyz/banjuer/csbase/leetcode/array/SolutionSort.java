@@ -1,6 +1,6 @@
 package xyz.banjuer.csbase.leetcode.array;
 
-import xyz.banjuer.common.utils.ArrayUtils;
+import xyz.banjuer.common.utils.ListUtils;
 import xyz.banjuer.common.utils.SortUtils;
 
 /**
@@ -145,11 +145,11 @@ public class SolutionSort {
 
     public static void main(String[] args) {
         SolutionSort solution = new SolutionSort();
-        int[] nums = ArrayUtils.genArray(20, 100);
-        ArrayUtils.println(nums);
+        int[] nums = ListUtils.genArray(20, 100);
+        ListUtils.println(nums);
         System.out.println(solution.findKthLargest(nums, 3));
         SortUtils.mergeSort(nums);
-        ArrayUtils.println(nums);
+        ListUtils.println(nums);
         // int[] nums = ArrayUtils.genArray(20, 2);
         // ArrayUtils.println(nums);
         // solution.sortColors(nums);

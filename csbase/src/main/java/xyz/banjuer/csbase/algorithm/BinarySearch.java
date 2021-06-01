@@ -1,6 +1,6 @@
 package xyz.banjuer.csbase.algorithm;
 
-import xyz.banjuer.common.utils.ArrayUtils;
+import xyz.banjuer.common.utils.ListUtils;
 
 public class BinarySearch {
 
@@ -32,8 +32,8 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-        int[] nums = ArrayUtils.genSorted(100, 100);
-        ArrayUtils.println(nums);
+        int[] nums = ListUtils.genSorted(100, 100);
+        ListUtils.println(nums);
         int target = 32;
         // int index = findIndexRecursion(nums, target);
         int index = findIndex(nums, target);

@@ -1,9 +1,11 @@
 package xyz.banjuer.common.utils;
 
+import xyz.banjuer.common.entity.ListNode;
+
 import java.util.Arrays;
 import java.util.Random;
 
-public class ArrayUtils {
+public class ListUtils {
 
     public static boolean isSorted(int[] arr) {
         if (arr.length == 1) return true;
@@ -38,7 +40,7 @@ public class ArrayUtils {
             if (i != arr.length - 1) sb.append(", ");
         }
         sb.append(']');
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     public static void swap(int[] arr, int sIndex, int tIndex) {
@@ -47,11 +49,24 @@ public class ArrayUtils {
         arr[tIndex] = tmp;
     }
 
-    public static void main(String[] args) {
-        int[] sorted = ArrayUtils.genSorted(10, 100);
-        ArrayUtils.println(sorted);
-        ArrayUtils.swap(sorted, 1, 2);
-        ArrayUtils.println(sorted);
+    public static ListNode createLink(int[] arr) {
+        ListNode dummy = new ListNode(0);
+        ListNode head = dummy;
+        for (int i = 0; i < arr.length; i++) {
+            head.next = new ListNode(arr[i]);
+            head = head.next;
+        }
+        return dummy.next;
+    }
+
+    public static void printLink(ListNode head) {
+        StringBuilder builder = new StringBuilder();
+        while (head != null) {
+            builder.append(head.val).append("->");
+            head = head.next;
+        }
+        builder.append("NULL");
+        System.out.println(builder);
     }
 
 }

@@ -1,6 +1,6 @@
 package xyz.banjuer.csbase.leetcode.array;
 
-import xyz.banjuer.common.utils.ArrayUtils;
+import xyz.banjuer.common.utils.ListUtils;
 
 /**
  * 双指针
@@ -125,14 +125,14 @@ public class SolutionSinglePointer {
     public static void main(String[] args) {
         SolutionSinglePointer s = new SolutionSinglePointer();
         int[] ints;
-        ints = ArrayUtils.genSorted(15, 10);
+        ints = ListUtils.genSorted(15, 10);
         // ints = new int[]{0,0,1,1,1,2,2,3,3,4};
-        ArrayUtils.println(ints);
+        ListUtils.println(ints);
         // int i = s.removeDuplicates(ints);
         // int i = s.removeElement(ints, 2);
         int i = s.removeDuplicates2(ints);
         // s.moveZeroes(ints);
-        ArrayUtils.println(ints);
+        ListUtils.println(ints);
         System.out.println(i);
     }
 
