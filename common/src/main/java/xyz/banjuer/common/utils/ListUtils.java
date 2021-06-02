@@ -32,6 +32,18 @@ public class ListUtils {
         return arr;
     }
 
+    public static void println(Object[] arr) {
+        if (arr == null) return;
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(arr[i].toString());
+            if (i != arr.length - 1) sb.append(',');
+        }
+        sb.append(']');
+        System.out.println(sb);
+    }
+
     public static void println(int[] arr) {
         StringBuilder sb = new StringBuilder(arr.length * 4);
         sb.append('[');
