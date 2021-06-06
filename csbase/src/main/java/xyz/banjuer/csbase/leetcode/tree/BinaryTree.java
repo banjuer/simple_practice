@@ -1,5 +1,7 @@
 package xyz.banjuer.csbase.leetcode.tree;
 
+import xyz.banjuer.common.entity.TreeNode;
+
 public class BinaryTree {
 
     /**
