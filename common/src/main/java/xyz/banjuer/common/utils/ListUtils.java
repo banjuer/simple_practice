@@ -45,6 +45,9 @@ public class ListUtils {
     }
 
     public static void println(int[] arr) {
+        if (arr == null) {
+            return;
+        }
         StringBuilder sb = new StringBuilder(arr.length * 4);
         sb.append('[');
         for (int i = 0; i < arr.length; i++) {
