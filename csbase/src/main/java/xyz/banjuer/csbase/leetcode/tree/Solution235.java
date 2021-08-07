@@ -15,9 +15,16 @@ public class Solution235 {
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        int l = Math.min(p.val, q.val);
-        int r = Math.max(p.val, q.val);
-        return lowestCommonAncestor(root, l, r);
+        if (root == null) {
+            return null;
+        }
+        if (p.val < root.val && q.val < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        if (p.val > root.val && q.val > root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return root;
     }
 
 }
