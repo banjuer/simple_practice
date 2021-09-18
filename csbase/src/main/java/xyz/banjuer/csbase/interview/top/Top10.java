@@ -1,7 +1,6 @@
 package xyz.banjuer.csbase.interview.top;
 
 import xyz.banjuer.common.entity.ListNode;
-import xyz.banjuer.common.utils.ListUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,14 +107,37 @@ public class Top10 {
      */
 
     public int lengthOfLongestSubstring(String s) {
-        // TODO
-        return -1;
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        Map<Character, Integer> charIndex = new HashMap<>((int)(s.length()/.75f) + 1);
+        char[] chars = s.toCharArray();
+        int max = 0;
+        // 遍历过程中维护[l,r]无重复序列
+        int l;
+        for (int r = 0; r < chars.length; r++) {
+            Integer index = charIndex.get(chars[r]);
+            // 即将发生重复字符串
+            if (index != null) {
+                max = Math.max(max, charIndex.size());
+                charIndex.clear();
+                // 不重复序列从开始重复的下一位置开始
+                l = index + 1;
+                for (int i = l; i <= r; i++) {
+                    charIndex.put(chars[i], i);
+                }
+            } else {
+                charIndex.put(chars[r], r);
+            }
+        }
+        return Math.max(max, charIndex.size());
     }
 
     public static void main(String[] args) {
         Top10 top10 = new Top10();
-        ListNode head = ListUtils.createLink(new int[]{1,2,3,4,5});
-        ListUtils.println(top10.reverseList(head));
+        // ListNode head = ListUtils.createLink(new int[]{1,2,3,4,5});
+        // ListUtils.println(top10.reverseList(head));
+        System.out.println(top10.lengthOfLongestSubstring(" "));
     }
 
 }
