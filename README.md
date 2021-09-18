@@ -11,6 +11,13 @@ simple_practice
 ----`paxos`:paxos实例实现
 ```
 
+### Paxos算法简单实现
+> 基于springboot作为服务实例, http作为RPC调用, sqlite3数据持久化。
+* 每一个启动的应用实例既是一个**Proposer**同时又承担了**Acceptor**角色
+* `application.yml`中定义`acceptor`实例地址
+* 关于**Paxos**原理详解,[参考](https://github.com/turingcell/paxos-made-easy)
+
+
 ## 设计模式
 > `xyz.banjuer.parttern`
 
@@ -78,12 +85,6 @@ simple_practice
 * 242 有效的字母异位词
 * 349 两个数组的交集
 * 350 两个数组的交集 II
-
-### Paxos算法实现
-> 基于springboot作为服务实例, http作为RPC调用, sqlite3数据持久化。
-* 每一个启动的应用实例既是一个**Proposer**同时又承担了**Acceptor**角色
-* `application.yml`中定义`acceptor`实例地址
-* 关于**Paxos**原理详解,[参考](https://github.com/turingcell/paxos-made-easy)
 
 ## 网络编程与Netty
 TODO
