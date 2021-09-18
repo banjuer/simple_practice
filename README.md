@@ -1,4 +1,20 @@
 # 后端开发知识点简单实战
+
+- [后端开发知识点简单实战](#-----------)
+  * [项目结构](#----)
+  * [实践](#--)
+    + [Paxos算法简单实现](#paxos------)
+    + [计算π](#---)
+  * [设计模式](#----)
+    + [实现](#--)
+  * [算法](#--)
+    + [基础算法](#----)
+    + [leetcode](#leetcode)
+      - [线性结构-数组](#-------)
+    + [剑指offer](#--offer)
+    + [高频题](#---)
+  * [网络编程与Netty](#-----netty)
+
 ## 项目结构
 ```
 simple_practice
@@ -11,12 +27,18 @@ simple_practice
 ----`paxos`:paxos实例实现
 ```
 
+## 实践
+
 ### Paxos算法简单实现
 > 基于springboot作为服务实例, http作为RPC调用, sqlite3数据持久化。
 * 每一个启动的应用实例既是一个**Proposer**同时又承担了**Acceptor**角色
 * `application.yml`中定义`acceptor`实例地址
 * 关于**Paxos**原理详解,[参考](https://github.com/turingcell/paxos-made-easy)
 
+### 计算π
+>`xyz.banjuer.csbase.interview.GetPI`
+
+**原理:蒙特卡洛简单实现**
 
 ## 设计模式
 > `xyz.banjuer.parttern`
@@ -85,6 +107,15 @@ simple_practice
 * 242 有效的字母异位词
 * 349 两个数组的交集
 * 350 两个数组的交集 II
+
+### 剑指offer
+>`xyz.banjuer.csbase.offer`
+
+### [高频题](https://codetop.cc/home)
+感谢[@LeetcodeTop](https://github.com/afatcoder/LeetcodeTop)
+> `xyz.banjuer.csbase.interview.top`
+
+
 
 ## 网络编程与Netty
 TODO
