@@ -64,8 +64,12 @@ simple_practice
 
 ## 算法
 
+### 我的leetcode进度
+[![4GOBes.png](https://z3.ax1x.com/2021/09/20/4GOBes.png)](https://imgtu.com/i/4GOBes)
+
 ### 基础算法
 **排序**
+
 > `xyz.banjuer.common.utils.SortUtils`
 * 归并排序(递归: 自顶向下)
 * 归并排序(遍历: 自底向上)
