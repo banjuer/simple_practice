@@ -133,11 +133,58 @@ public class Top10 {
         return Math.max(max, charIndex.size());
     }
 
+
+    /**
+     * ==========================================
+     * 215. 数组中的第K个最大元素
+     * =========================================
+     */
+    public int findKthLargest(int[] nums, int k) {
+        assert nums != null && nums.length >= k;
+        int l = 0, r = nums.length - 1;
+        k = nums.length - k;
+        while (true) {
+            int p = partition(nums, l, r);
+            if (p > k) {
+                r = p - 1;
+            } else if (p < k) {
+                l = p + 1;
+            } else {
+                return nums[p];
+            }
+        }
+    }
+
+    private int partition(int[] nums, int l, int r) {
+        int v = nums[l];
+        // [l + 1, le] <= v, (le, i) > v
+        int le = l, i = l + 1;
+        while (i <= r) {
+            if (nums[i] <= v) {
+                swap(nums, le + 1, i);
+                le ++;
+            }
+            i++;
+        }
+        swap(nums, l, le);
+        return le;
+    }
+
+    private void swap(int[] arr, int s, int t) {
+        int temp = arr[s];
+        arr[s] = arr[t];
+        arr[t] = temp;
+    }
+
+
+
     public static void main(String[] args) {
         Top10 top10 = new Top10();
         // ListNode head = ListUtils.createLink(new int[]{1,2,3,4,5});
         // ListUtils.println(top10.reverseList(head));
-        System.out.println(top10.lengthOfLongestSubstring(" "));
+        // System.out.println(top10.lengthOfLongestSubstring(" "));
+        int kthLargest = top10.findKthLargest(new int[]{1, 3, 2, 4, 7, 5, 6}, 3);
+        System.out.println(kthLargest);
     }
 
 }
