@@ -4,6 +4,7 @@ import xyz.banjuer.common.entity.ListNode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class Top10 {
 
@@ -176,6 +177,61 @@ public class Top10 {
         arr[t] = temp;
     }
 
+    /**
+     * ==========================================
+     * 25. K 个一组翻转链表
+     * =========================================
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // 先计算长度，得出反转段
+        int len = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            len++;
+            cur = cur.next;
+        }
+        assert k <= len && len > 0;
+        ListNode dummy = new ListNode(0);
+        ListNode done = dummy;
+        cur = head;
+        Stack<ListNode> stack = new Stack<>();
+        for (int i = 1; i <= len / k; i++) {
+            for (int j = 0; j < k; j++) {
+                stack.push(cur);
+                cur = cur.next;
+            }
+            while (!stack.isEmpty()) {
+                ListNode pop = stack.pop();
+                pop.next = null;
+                done.next = pop;
+                done = done.next;
+            }
+        }
+        while (cur != null) {
+            done.next = cur;
+            cur = cur.next;
+            done = done.next;
+        }
+        return dummy.next;
+    }
+
+    /**
+     * ==========================================
+     * 912. 排序数组
+     * =========================================
+     */
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        quick(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private void quick(int[] nums, int l, int r) {
+        if (r <= l) return;
+        int p = partition(nums, l, r);
+        quick(nums, l, p - 1);
+        quick(nums, p + 1, r);
+    }
 
 
     public static void main(String[] args) {
