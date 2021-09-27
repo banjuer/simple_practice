@@ -2,7 +2,10 @@ package xyz.banjuer.csbase.interview.top;
 
 import xyz.banjuer.common.entity.ListNode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -233,6 +236,68 @@ public class Top10 {
         quick(nums, p + 1, r);
     }
 
+    /**
+     * ==========================================
+     * 15. 三数之和 FIXME
+     * =========================================
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums == null || nums.length < 3) return result;
+        // 先排序再使用滑动窗口处理每一个元素
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            // if (nums[i] == nums[i-1]) continue;
+            int l = i + 1, r = nums.length - 1;
+            // 滑动窗口寻找两数之和:-nums[i]
+            int t = -nums[i];
+            while (l < r) {
+                int sum = nums[l] + nums[r];
+                if (sum == t) {
+                    List<Integer> ele = new ArrayList<>(3);
+                    ele.add(nums[i]);
+                    ele.add(nums[l]);
+                    ele.add(nums[r]);
+                    result.add(ele);
+                } else if (sum > t) {
+                    // while (nums[r] != nums[r - 1]) {
+                        r--;
+                    // }
+                } else {
+                    // while (nums[l] != nums[l + 1]) {
+                        l++;
+                    // }
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * ==========================================
+     * 1. 两数之和
+     * =========================================
+     */
+    public int[] twoSum(int[] nums, int target) {
+        // for (int i = 0; i < nums.length; i++) {
+        //     for (int j = i + 1; j < nums.length; j++) {
+        //         if (nums[i] + nums[j] == target) {
+        //             return new int[]{i, j};
+        //         }
+        //     }
+        // }
+        // 值重复
+        Map<Integer, Integer> map = new HashMap<>((int)(nums.length / .75) + 1);
+        for (int i = 0; i < nums.length; i++) {
+            Integer extra = map.get(target - nums[i]);
+            if (extra != null) {
+                return new int[]{i, extra};
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return new int[0];
+    }
 
     public static void main(String[] args) {
         Top10 top10 = new Top10();
